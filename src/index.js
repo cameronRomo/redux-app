@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './store';
-import { bugAdded, bugResolved } from './actions';
+import configureStore from './store/configureStore';
+import { bugAdded, bugResolved } from './store/bugs';
 
-const unsubscribe = store.subscribe(() => {
-  console.log('Store changed!', store.getState());
+const store = configureStore();
+
+store.subscribe(() => {
+  console.log('Store changed!');
 });
 
 store.dispatch(bugAdded("Bug 1"));
+store.dispatch(bugAdded("Bug 2"));
+store.dispatch(bugAdded("Bug 3"));
 store.dispatch(bugResolved(1));
-
-unsubscribe();
 
 console.log('store.getState() :>> ', store);
 
