@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import configureStore from './store/configureStore';
 import { bugAdded, bugResolved } from './store/bugs';
+import { projectAdded } from './store/projects';
 
 const store = configureStore();
 
 store.subscribe(() => {
   console.log('Store changed!');
 });
+
+store.dispatch(projectAdded({ name: "Project 1" }));
 
 store.dispatch(bugAdded({ description: "Bug 1" }));
 store.dispatch(bugAdded({ description: "Bug 2" }));

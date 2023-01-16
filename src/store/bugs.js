@@ -18,7 +18,7 @@ const slice = createSlice({
       bugs[index].resolved = true;
     }
   }
-})
+});
 
 export const { bugAdded, bugResolved } = slice.actions;
 export default slice.reducer;
