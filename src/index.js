@@ -4,16 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import configureStore from './store/configureStore';
-import { bugAdded, bugResolved, getUnresolvedBugs, bugAssignedToUser, getBugsByUser } from './store/bugs';
-import { projectAdded } from './store/projects';
-import { userAdded } from './store/users';
+import { loadBugs } from './store/bugs';
 
 const store = configureStore();
 
-store.dispatch({
-  type: 'error',
-  payload: { message: 'An error occurred.' }
-})
+store.dispatch(loadBugs());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
