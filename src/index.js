@@ -4,11 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import configureStore from './store/configureStore';
-import { addBug } from './store/bugs';
+import { loadBugs, resolveBug } from './store/bugs';
 
 const store = configureStore();
 
-store.dispatch(addBug({ description: 'a' }));
+store.dispatch(loadBugs());
+
+setTimeout(() => store.dispatch(resolveBug(1)), 2000);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
