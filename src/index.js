@@ -10,13 +10,10 @@ import { userAdded } from './store/users';
 
 const store = configureStore();
 
-store.dispatch((dispatch, getState) => {
-  // Call an API
-  // When promise is resolved => dispatch()
-  dispatch({ type: 'bugsRecieved', bugs: [1, 2, 3]});
-  console.log(getState());
-  // If promise is rejected => dispatch()
-});
+store.dispatch({
+  type: 'error',
+  payload: { message: 'An error occurred.' }
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
