@@ -1,18 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import configureStore from './store/configureStore';
-import { loadBugs, assignBugToUser } from './store/bugs';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import store from "./store";
+import { bugAdded, bugResolved } from "./actions";
 
-const store = configureStore();
+store.dispatch(bugAdded("Bug 1"));
+store.dispatch(bugResolved(1));
 
-store.dispatch(loadBugs());
+console.log("store.getState() :>> ", store.getState());
 
-setTimeout(() => store.dispatch(assignBugToUser(1, 4)), 2000);
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />
