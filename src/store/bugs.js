@@ -1,30 +1,24 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-// Action creators
-export const bugAdded = createAction("bugAdded");
-export const bugRemoved = createAction("bugRemoved");
-export const bugResolved = createAction("bugResolved");
-
-// Reducer
 let lastId = 1;
 
-const reducer = (state = [], action) => {
-  if (action.type === bugAdded.type)
-    return [
-      ...state,
-      {
+const slice = createSlice({
+  name: "bugs",
+  initialState: [],
+  reducers: {
+    bugAdded: (bugs, action) => {
+      bugs.push({
         id: lastId++,
         description: action.payload.description,
         resolved: false,
-      },
-    ];
-  else if (action.type === bugRemoved.type)
-    return state.filter((bug) => bug.id !== action.payload.id);
-  else if (action.type === bugResolved.type)
-    return state.map((bug) =>
-      bug.id !== action.payload.id ? bug : { ...bug, resolved: true }
-    );
-  return state;
-};
+      });
+    },
+    bugResolved: (bugs, action) => {
+      const index = bugs.findIndex((bug) => bug.id === action.payload.id);
+      bugs[index].resolved = true;
+    },
+  },
+});
 
-export default reducer;
+export const { bugAdded, bugResolved } = slice.actions;
+export default slice.reducer;
