@@ -15,10 +15,13 @@ const slice = createSlice({
     },
     bugResolved: (bugs, action) => {
       const index = bugs.findIndex((bug) => bug.id === action.payload.id);
-      bugs[index].resolved = true;
+      if (index !== -1) bugs[index].resolved = true;
     },
   },
 });
 
 export const { bugAdded, bugResolved } = slice.actions;
 export default slice.reducer;
+
+export const getUnresolvedBugs = (state) =>
+  state.entities.bugs.filter((bug) => !bug.resolved);
